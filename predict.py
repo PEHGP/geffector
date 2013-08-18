@@ -112,12 +112,16 @@ class RandomForestPredict:
 		#print l
 		self.r=l
 if __name__=="__main__":
-	fname=sys.argv[1]
-	p=FormatAll(fname)
-	p.EasyFormat()
-	p=RandomForestPredict(fname)
-	r=p.r
-	f=open(fname+".results","w")
-	for x in r:
-		f.write(x[0]+"\t"+str(x[1])+"\n")
-	f.close()
+	if len(sys.argv)==3:
+		fname=sys.argv[1]
+		fw=sys.argv[2]
+		p=FormatAll(fname)
+		p.EasyFormat()
+		p=RandomForestPredict(fname)
+		r=p.r
+		f=open(fw,"w")
+		for x in r:
+			f.write(x[0]+"\t"+str(x[1])+"\n")
+		f.close()
+	else:
+		print "\npredict.py <FastaFile> <ResultsFile>\n"
