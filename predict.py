@@ -3,7 +3,7 @@ import re,sys,os,subprocess
 class FormatAll:
 	def __init__(self,fname):
 		#self.pwd=os.path.dirname(os.path.abspath(__file__))+"/results/"
-		self.frname=fname+".fasta"
+		self.frname=fname
 		self.fwname=fname+".arff"
 		self.seq={}
 		self.d={}
