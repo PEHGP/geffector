@@ -3,20 +3,28 @@ import re,sys,os,subprocess
 class FormatAll:
 	def __init__(self,fname):
 		#self.pwd=os.path.dirname(os.path.abspath(__file__))+"/results/"
-		self.frname=fname
+		self.frname="temppre.fasta"
+		f=open(self.frname,"w")
 		self.fwname=fname+".arff"
 		self.seq={}
 		self.d={}
-		for x in open(self.frname):
+		self.c={}
+		n=0
+		for x in open(fname):
 			x=x.rstrip()
 			m=re.search(">(.*)",x)
 			if m:
-				p=m.group(1)
+				n+=1
+				p="p"+str(n)
+				f.write(">"+p+"\n")
+				self.c[p]=m.group(1)
 				self.d[p]={}
 				self.seq[p]=""
 				continue
-			self.seq[p]+=x		
-	def FormatProsite(self):				
+			self.seq[p]+=x
+			f.write(x+"\n")
+		f.close()
+	def FormatProsite(self):			
 		l=[]
 		for x in open("motifs.list"):
 			x=x.rstrip()
@@ -117,11 +125,11 @@ if __name__=="__main__":
 		fw=sys.argv[2]
 		p=FormatAll(fname)
 		p.EasyFormat()
-		p=RandomForestPredict(fname)
-		r=p.r
+		p2=RandomForestPredict(fname)
+		r=p2.r
 		f=open(fw,"w")
 		for x in r:
-			f.write(x[0]+"\t"+str(x[1])+"\n")
+			f.write(p.c[x[0]]+"\t"+str(x[1])+"\n")#changename
 		f.close()
 	else:
 		print "\npredict.py <FastaFile> <ResultsFile>\n"
