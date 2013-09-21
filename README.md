@@ -6,6 +6,6 @@ How To Use It
 	predict.py <FastaFile> <ResultsFile>
 Requirements
 -----------------
-1.weka
-2.ps_scan
-3.effector models
+1. weka
+2. ps_scan
+3. effector models
