@@ -9,3 +9,4 @@ Requirements
 1. weka
 2. ps_scan
 3. effector models
+4. arff
